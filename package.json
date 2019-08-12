@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha -R spec",
-    "lint": "standard . --fix"
+    "lint": "standard .",
+    "format": "prettier-standard 'lib/*.js' 'test/*.js'"
   },
   "author": "Rodier Madiande",
   "license": "ISC",
@@ -13,5 +14,8 @@
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
     "standard": "^13.1.0"
+  },
+  "dependencies": {
+    "prettier-standard": "^9.1.1"
   }
 }
