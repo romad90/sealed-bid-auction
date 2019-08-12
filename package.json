@@ -4,11 +4,13 @@
   "description": "Algorithm for finding the winner and the winning price of a second-price, sealed-bid auction.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -R spec"
   },
   "author": "Rodier Madiande",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
     "standard": "^13.1.0"
   }
 }
