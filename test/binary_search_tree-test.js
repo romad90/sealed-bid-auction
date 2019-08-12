@@ -42,6 +42,41 @@ describe('Binary search tree', () => {
     expect(bst.root.left).to.be.equal(null)
     done()
   })
+  it('search() should return the researched node if the key is found', (done) => {
+    const bst = new BST()
+    bst.add(27)
+    bst.add(14, 'alfa')
+    bst.add(10, 'bravo')
+    bst.add(19, 'charly')
+    bst.add(35, 'delta')
+    bst.add(31, 'echo')
+    bst.add(42, 'foxtrot')
+    const foundNode = bst.search(10)
+    expect(foundNode.key).to.be.equal(10)
+    expect(foundNode.bidders).to.be.eql(['bravo'])
+    done()
+  })
+  it('search() should NOT return the researched node if the key is not found', (done) => {
+    const bst = new BST()
+    bst.add(27)
+    bst.add(14, 'alfa')
+    bst.add(10, 'bravo')
+    bst.add(19, 'charly')
+    bst.add(35, 'delta')
+    bst.add(31, 'echo')
+    bst.add(42, 'foxtrot')
+    expect(bst.search(999)).to.be.equal(false)
+    done()
+  })
+  it('search() should NOT return the researched node if the bst is empty', (done) => {
+    try {
+     const bst = new BST()
+     bst.search(999)
+    }catch (err) {
+      expect(err.message).to.be.equal('BST is empty!')
+    }
+    done()
+  })
   it('getMax() should return the maximum node of the BST', (done) => {
     const bst = new BST()
     bst.add(27)
