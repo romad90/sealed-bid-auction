@@ -1,0 +1,14 @@
+{
+  "name": "sealed-bid-auction",
+  "version": "1.0.0",
+  "description": "Algorithm for finding the winner and the winning price of a second-price, sealed-bid auction.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rodier Madiande",
+  "license": "ISC",
+  "devDependencies": {
+    "standard": "^13.1.0"
+  }
+}
