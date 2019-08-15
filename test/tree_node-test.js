@@ -2,7 +2,7 @@
 
 const chai = require('chai')
 const expect = chai.expect
-const TreeNode = require('../lib/treeNode.js')
+const TreeNode = require('../lib/tree_node.js')
 
 describe('TreeNode', () => {
   it('constructor(12.5) should NOT create a treeNode passing a float because, the key must be an integer.', done => {
@@ -58,9 +58,9 @@ describe('TreeNode', () => {
     expect(treeNode.key).to.equal(667)
     done()
   })
-  it('constructor(667) should create a treeNode with a bidders property having *reservePrice only.', done => {
+  it(`constructor(667) should create a treeNode with a bidders property as en empty array.`, done => {
     const treeNode = new TreeNode(667)
-    expect(treeNode.bidders).to.eql(['*reservePrice'])
+    expect(treeNode.bidders).to.eql([])
     done()
   })
   it('constructor(667) should create a treeNode with a left property equal to null.', done => {

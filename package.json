@@ -6,7 +6,10 @@
   "scripts": {
     "test": "mocha -R spec",
     "lint": "standard .",
-    "format": "prettier-standard 'lib/*.js' 'test/*.js'"
+    "format": "prettier-standard 'lib/*.js' 'test/*.js' 'src/*.js' 'src/server/*.js' 'src/server/src/*.js'",
+		"help": "./bin/computation --help",
+    "api": "./bin/computation api-webservices | ./node_modules/.bin/pino-pretty -c -t",
+		"local": "./bin/computation local-processing"
   },
   "author": "Rodier Madiande",
   "license": "ISC",
@@ -16,6 +19,8 @@
     "standard": "^13.1.0"
   },
   "dependencies": {
+    "commander": "^3.0.0",
+    "pino-pretty": "^3.2.0",
     "prettier-standard": "^9.1.1"
   }
 }

@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+`use strict`
+
+const program = require('commander')
+
+program
+  .version('0.0.1')
+  .description('Run computation around second price sealed-bid auction')
+
+program
+  .command("local-processing <source>")
+  .description('run the computation on the .json file specified')
+  .action(require('../src/local-processing.js'))
+
+program
+  .command("api-webservices")
+  .description('run the computation via a REST API')
+  .action(require('../src/server/index.js'))
+
+program.parse(process.argv)
+
+process.stdin.resume();
+process.on('SIGINT', function () {
+  process.exit(0);
+});

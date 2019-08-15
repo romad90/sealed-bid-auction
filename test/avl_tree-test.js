@@ -5,9 +5,18 @@ const expect = chai.expect
 const AVLTree = require('../lib/avl_tree.js')
 
 describe('AVLTree', () => {
-  it('constructor(), bst isReservePriceSet property must equal false', done => {
+  it('constructor(), bst reservePrice property must be null', done => {
     const bst = new AVLTree()
-    expect(bst.isReservePriceSet).to.be.equal(false)
+    expect(bst.reservePrice).to.be.equal(null)
+    done()
+  })
+  it('constructor(), bst reservePrice property must be greater than 0', done => {
+    const bst = new AVLTree()
+    try {
+      bst.insert(0)
+    } catch (err) {
+      expect(err.message).to.equal('start_price must be greater than 0!')
+    }
     done()
   })
   it('constructor(), bst root property must equal null', done => {
@@ -15,10 +24,10 @@ describe('AVLTree', () => {
     expect(bst.root).to.be.equal(null)
     done()
   })
-  it('insert(119), bst isReservePriceSet property must equal true', done => {
+  it('insert(119), bst reservePrice property must equal the first key inserted', done => {
     const bst = new AVLTree()
     bst.insert(119)
-    expect(bst.isReservePriceSet).to.be.equal(true)
+    expect(bst.reservePrice).to.be.equal(119)
     done()
   })
   it('insert(119), should insert a treeNode root in the BST having a key equal to 119', done => {
@@ -45,17 +54,17 @@ describe('AVLTree', () => {
     expect(bst.root.right).to.be.equal(null)
     done()
   })
-  it('insert(119) should insert a treeNode root in the BST having bidders property having *reservePrice', done => {
+  it(`insert(119) should affect 119 as the reservePrice BST property`, done => {
     const bst = new AVLTree()
     bst.insert(119)
-    expect(bst.root.bidders).to.be.eql(['*reservePrice'])
+    expect(bst.reservePrice).to.be.eql(119)
     done()
   })
   it('insert(119, bravo) should add bravo in the bidders root property.', done => {
     const bst = new AVLTree()
     bst.insert(119)
     bst.insert(119, 'bravo')
-    expect(bst.root.bidders).to.be.eql(['*reservePrice', 'bravo'])
+    expect(bst.root.bidders).to.be.eql(['bravo'])
     done()
   })
   it('insert(567) should NOT insert a second treeNode without bidderName', done => {
@@ -64,7 +73,7 @@ describe('AVLTree', () => {
     try {
       bst.insert(567)
     } catch (err) {
-      expect(err.message).to.be.equal('Reserve price must be set once!')
+      expect(err.message).to.be.equal('Start price must be set once!')
     }
     done()
   })
@@ -188,77 +197,16 @@ describe('AVLTree', () => {
     expect(bst.preOrder()).to.be.eql([15, 10, 20, 16, 25])
     done()
   })
-  it('getTreeNodeWinner(), should return the max tree node(obviously the the winner)', done => {
-    const bst = new AVLTree()
-    bst.insert(15)
-    bst.insert(10, 'alfa')
-    bst.insert(20, 'bravo')
-    bst.insert(16, 'echo')
-    bst.insert(25, 'foxtrot')
-    const maxTreeNode = bst.getTreeNodeWinner()
-    expect(maxTreeNode.key).to.be.eql(25)
-    done()
-  })
-  it('getTreeNodeWinner(), should NOT return the max tree node, because there is no bidder', done => {
-    const bst = new AVLTree()
-    bst.insert(15)
-    const maxTreeNode = bst.getTreeNodeWinner()
-    expect(maxTreeNode).to.be.eql(false)
-    done()
-  })
-  it('getTreeNodeWinner(), should NOT return the max tree node, because there is two bidders at the highest amount.', done => {
-    const bst = new AVLTree()
-    bst.insert(15)
-    bst.insert(10, 'alfa')
-    bst.insert(20, 'bravo')
-    bst.insert(16, 'echo')
-    bst.insert(25, 'foxtrot')
-    bst.insert(25, 'golf')
-    const maxTreeNode = bst.getTreeNodeWinner()
-    expect(maxTreeNode).to.be.eql(false)
-    done()
-  })
   it('getMaxTreeNode(), should return the max tree node without any conditions.', done => {
     const bst = new AVLTree()
     bst.insert(15)
-    bst.insert(10, 'alfa')
-    bst.insert(20, 'bravo')
-    bst.insert(16, 'echo')
-    bst.insert(25, 'foxtrot')
-    bst.insert(25, 'golf')
+    bst.insert(9, 'alfa')
+    bst.insert(2, 'foxtrot')
+    bst.insert(5, 'bravo')
+    bst.insert(13, 'echo')
+    bst.insert(14, 'foxtrot')
     const maxTreeNode = bst.getMaxTreeNode(bst.root)
-    expect(maxTreeNode.key).to.be.eql(25)
-    done()
-  })
-  it('getTreeNodeWinningPrice(), should return the tree node winning price. (second price)', done => {
-    const bst = new AVLTree()
-    bst.insert(15)
-    bst.insert(10, 'alfa')
-    bst.insert(20, 'bravo')
-    bst.insert(16, 'echo')
-    bst.insert(25, 'foxtrot')
-    const maxTreeNode = bst.getTreeNodeWinner()
-    const winningPriceTreeNode = bst.getTreeNodeWinningPrice(
-      bst.root,
-      maxTreeNode
-    )
-    expect(winningPriceTreeNode.key).to.be.eql(20)
-    done()
-  })
-  it('getTreeNodeWinningPrice(), should return the tree node winning price even if the higher bidder have made n bids before. (second price)', done => {
-    const bst = new AVLTree()
-    bst.insert(15)
-    bst.insert(10, 'alfa')
-    bst.insert(23, 'foxtrot')
-    bst.insert(20, 'bravo')
-    bst.insert(16, 'echo')
-    bst.insert(25, 'foxtrot')
-    const maxTreeNode = bst.getTreeNodeWinner()
-    const winningPriceTreeNode = bst.getTreeNodeWinningPrice(
-      bst.root,
-      maxTreeNode
-    )
-    expect(winningPriceTreeNode.key).to.be.eql(20)
+    expect(maxTreeNode.key).to.be.eql(15)
     done()
   })
 })
