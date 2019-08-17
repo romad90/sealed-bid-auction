@@ -12,7 +12,11 @@
     "docs": "./node_modules/.bin/apidoc -i ./src/fastify -o docs/"
   },
 	"apidoc":{
-		"name": "Computation"
+		"name": "Computation",
+		"version": "1.0.0",
+		"description": "REST API Computation",
+		"title": "apiDoc REST API Computation",
+		"url" : "https://localhost:3000"
 	},
   "author": "Rodier Madiande",
   "license": "ISC",

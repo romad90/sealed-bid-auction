@@ -1,8 +1,8 @@
 async function routes (fastify, options) {	
   /**
-   * @api {get} / Entry point.
-   * @apiName GetConnection
-   * @apiGroup Connection
+   * @api {get} / Web services status
+   * @apiName GetStatus
+   * @apiGroup Status
    *
    * @apiSuccessExample {json} Success-Response:
    *  HTTP/1.1 200 OK
@@ -14,36 +14,41 @@ async function routes (fastify, options) {
   })
 
   /**
-   * @api {post} / Request an array of bids objects to computation in order to determine the winner and the winning price.
-   * @apiName PostBids
-   * @apiGroup Bids
+   * @api {post} / Run computation on sessions sent
+   * @apiName PostAuctions
+   * @apiGroup Auction
    *
-   *  @apiParam {Array} auctions All bids for an auction session.
-   *
-   *  [ {
-   *      reserve_price: 100, //mandatory
-   *      A: [ 110, 130 ],
-   *      ...
-   *      Z: [ 132, 135, 140 ]
-   *    }
-   *  ]
+   *  @apiParam {Object[]} auctions All bids by an auction session.
+	 *	@apiParam {Integer} auction.bid.reserve_price Reserve price.
+	 *	@apiParam {Integer} auction.bid.some_bidder_name_a Amount bid.
+	 *	@apiParam {Integer} auction.bid.some_bidder_name_b Amount bid.
+	 *	@apiParam {Integer} [auction.bid.some_bidder_name_c] Amount bid.
+	 *	@apiParam {Integer} [auction.bid.some_bidder_name_d] Amount bid.
    *
    *  @apiSuccessExample {json} Success-Response:
    *  HTTP/1.1 200 OK
    *  {
-   *      "winner": "John Doe",
-   *      "winning-price": "67"
-   * }
-   * @apiSuccess {String} winner Name of the bidder.
-   * @apiSuccess {Integer} winning-price Winner price of the sealed-bid auction.
-   *
-   *
-   * @apiErrorExample {json} Error-Response:
-   *  HTTP/1.1 404 Not Found
-   *  {
-   *      "code":"ResourceNotFound",
-   *      "message":"/wrong-url does not exist"
-   *  }
+	 *    "processed": [
+	 *        {
+	 *           "reserve_price": 100,
+	 *           "some_bidder_name_a": [110, 130],
+	 *           "some_bidder_name_b": [],
+	 *           "some_bidder_name_c": [125],
+	 *           "some_bidder_name_d": [105],
+	 *           "winner": "some_bidder_name_a",
+	 *           "winning_price": 125
+	 *        }
+	 *    ]
+	 *  }
+	 *
+   * @apiSuccess {Object[]} processed All bids by an auction session, and the state session.
+	 * @apiSuccess {Integer} processed.bid.reserve_price Reserve price.
+	 * @apiSuccess {Integer} processed.bid.some_bidder_name_a Amount bid.
+	 * @apiSuccess {Integer} processed.bid.some_bidder_name_b Amount bid.
+	 * @apiSuccess {Integer} [processed.bid.some_bidder_name_c] Amount bid.
+	 * @apiSuccess {Integer} [processed.bid.some_bidder_name_d] Amount bid.
+   * @apiSuccess {String}  processed.bid.winner Name of the bidder(Or false).
+   * @apiSuccess {Integer} processed.bid.winning_price Winner price of the sealed-bid auction(Or false).
    *
    * @apiErrorExample {json} Error-Response:
    *   HTTP/1.1 500 Internal Server Error
