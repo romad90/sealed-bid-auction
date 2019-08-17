@@ -2,15 +2,18 @@
   "name": "sealed-bid-auction",
   "version": "1.0.0",
   "description": "Tiny program running algorithm for finding the winner and the winning price of a second-price, sealed-bid auction.",
-  "main": "index.js",
+  "bin": {
+    "computation": "./index.js"
+  },
   "scripts": {
     "test": "mocha -R spec",
     "lint": "standard .",
-    "format": "prettier-standard 'lib/*.js' 'test/*.js' 'src/*.js' 'src/server/*.js' 'src/server/src/*.js'",
-		"help": "./bin/computation --help",
-    "api": "./bin/computation api-webservices | ./node_modules/.bin/pino-pretty -c -t",
-		"local": "./bin/computation local-processing"
+    "format": "prettier-standard 'lib/*.js' 'test/*.js' 'src/*.js' 'src/fastify/*.js' 'src/fastify/endpoints/*.js'",
+    "docs": "./node_modules/.bin/apidoc -i ./src/fastify -o docs/"
   },
+	"apidoc":{
+		"name": "Computation"
+	},
   "author": "Rodier Madiande",
   "license": "ISC",
   "devDependencies": {
@@ -19,7 +22,10 @@
     "standard": "^13.1.0"
   },
   "dependencies": {
+    "apidoc": "^0.17.7",
     "commander": "^3.0.0",
+    "fastify": "^2.7.1",
+    "pino": "^5.13.2",
     "pino-pretty": "^3.2.0",
     "prettier-standard": "^9.1.1"
   }

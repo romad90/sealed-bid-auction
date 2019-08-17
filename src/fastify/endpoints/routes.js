@@ -1,4 +1,4 @@
-async function routes (fastify, options) {
+async function routes (fastify, options) {	
   /**
    * @api {get} / Entry point.
    * @apiName GetConnection

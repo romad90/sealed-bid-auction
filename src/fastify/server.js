@@ -1,10 +1,17 @@
 'use strict'
 
 module.exports = () => {
-  const fastify = require('fastify')({
-    logger: true
+  const pino = require('pino')
+  const log = pino({
+    prettyPrint: {
+      levelFirst: true
+    },
+    prettifier: require('pino-pretty')
   })
-  fastify.register(require('./src/routes'))
+  const fastify = require('fastify')({
+    logger: log
+  })
+  fastify.register(require('./endpoints/routes.js'))
   fastify.listen(3000, err => {
     if (err) {
       fastify.log.error(err)

@@ -1,28 +1,28 @@
 'use strict'
 
-module.exports = (source) => {
-	const fs = require('fs')
-	const path = require('path')
-	
-	fs.readFile(path.join(source),  function (err, rawData) {
-	  if (err) {
-			throw (err) 
-	  }
-		let data
-		try {
-			data = JSON.parse(rawData);
-		} catch(e) {
-			throw (e)
-		}
-		
-  	const AVLTree = require('../lib/avl_tree.js')
+module.exports = source => {
+  const fs = require('fs')
+  const path = require('path')
+
+  fs.readFile(path.join(source), function (err, rawData) {
+    if (err) {
+      throw err
+    }
+    let data
+    try {
+      data = JSON.parse(rawData)
+    } catch (e) {
+      throw e
+    }
+
+    const AVLTree = require('../lib/avl_tree.js')
     const auctionFilter = require('./filter_auction.js')
     const auctions = data.auctions.filter(auctionFilter)
     const processed = []
-		
-		console.log('*processing:')
-		console.log('************\n')
-		
+
+    console.log('*processing:')
+    console.log('************\n')
+
     auctions.forEach((bids, index) => {
       const bst = new AVLTree()
       bst.insert(bids.reserve_price)
@@ -49,11 +49,11 @@ module.exports = (source) => {
         }
       }
       console.log(bids)
-			console.log('\n')
+      console.log('\n')
       delete auctions[index]
     })
-		console.log('*end:')
-		console.log('************\n')
-  	process.exit(0)
-	});
+    console.log('*end:')
+    console.log('************\n')
+    process.exit(0)
+  })
 }
