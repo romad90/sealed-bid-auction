@@ -19,8 +19,8 @@ Commands above allow use to install nvm in order to manage the version of Node, 
 Some actions must be performed, before to launch the program:
 
 ```shell
-git clone https://github.com/your/awesome-project.git
-cd awesome-project/
+git clone https://github.com/romad90/sealed-bid-auction.git
+cd sealed-bid-auction/
 npm install
 npm run docs
 ```
