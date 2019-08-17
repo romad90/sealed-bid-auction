@@ -22,7 +22,8 @@ Some actions must be performed, before to launch the program:
 git clone https://github.com/romad90/sealed-bid-auction.git
 cd sealed-bid-auction/
 npm install
-npm run docs
+npm run docs            #Generate api docs, launch index.html in docs folder
+npm run test            #Launch all unit tests
 ```
 
 And state what happens step-by-step.
@@ -35,4 +36,4 @@ The program run as node-cli program:
 
 ## Licensing
 
-"The code in this project is licensed under ISC license."
+"The code in this project is licensed under MIT license."

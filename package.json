@@ -19,7 +19,7 @@
 		"url" : "https://localhost:3000"
 	},
   "author": "Rodier Madiande",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
