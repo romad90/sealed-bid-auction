@@ -6,23 +6,24 @@
     "computation": "./index.js"
   },
   "scripts": {
-    "test": "mocha -R spec",
+    "test": "nyc mocha -R spec",
     "lint": "standard .",
     "format": "prettier-standard 'lib/*.js' 'test/*.js' 'src/*.js' 'src/fastify/*.js' 'src/fastify/endpoints/*.js'",
     "docs": "./node_modules/.bin/apidoc -i ./src/fastify -o docs/"
   },
-	"apidoc":{
-		"name": "Computation",
-		"version": "1.0.0",
-		"description": "REST API Computation",
-		"title": "apiDoc REST API Computation",
-		"url" : "https://localhost:3000"
-	},
+  "apidoc": {
+    "name": "Computation",
+    "version": "1.0.0",
+    "description": "REST API Computation",
+    "title": "apiDoc REST API Computation",
+    "url": "https://localhost:3000"
+  },
   "author": "Rodier Madiande",
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
+    "nyc": "^14.1.1",
     "standard": "^13.1.0"
   },
   "dependencies": {
