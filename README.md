@@ -22,7 +22,7 @@ Some actions must be performed, before to launch the program:
 git clone https://github.com/romad90/sealed-bid-auction.git
 cd sealed-bid-auction/
 npm install
-npm run docs            #Generate api docs, launch index.html in docs folder
+npm run docs            #Generate api docs, jsdoc
 npm run test            #Launch all unit tests
 ```
 

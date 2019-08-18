@@ -15,7 +15,7 @@ describe('AVLTree', () => {
     try {
       bst.insert(0)
     } catch (err) {
-      expect(err.message).to.equal('start_price must be greater than 0!')
+      expect(err.message).to.equal('reservePrice property must be greater than 0!')
     }
     done()
   })
@@ -73,7 +73,7 @@ describe('AVLTree', () => {
     try {
       bst.insert(567)
     } catch (err) {
-      expect(err.message).to.be.equal('Start price must be set once!')
+      expect(err.message).to.be.equal('Reserve price must be set once!')
     }
     done()
   })
@@ -98,21 +98,21 @@ describe('AVLTree', () => {
     expect(bst.root.height).to.be.equal(2)
     done()
   })
-  it('add(147) should insert a node on the right root in the BST because 147 > 109', done => {
+  it('insert(147) should insert a node on the right root in the BST because 147 > 109', done => {
     const bst = new AVLTree()
     bst.insert(119)
     bst.insert(147, 'beta')
     expect(bst.root.right.key).to.not.be.equal(null)
     done()
   })
-  it('add(147) should keep root left property equal to null', done => {
+  it('insert(147) should keep root left property equal to null', done => {
     const bst = new AVLTree()
     bst.insert(119)
     bst.insert(147, 'beta')
     expect(bst.root.left).to.equal(null)
     done()
   })
-  it('add(147) should increment height root property to 2', done => {
+  it('insert(147) should increment height root property to 2', done => {
     const bst = new AVLTree()
     bst.insert(119)
     bst.insert(147, 'beta')
