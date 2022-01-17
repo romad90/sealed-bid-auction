@@ -1,6 +1,6 @@
 # Computation
 
-A demonstrator running an algorithm for finding the winner and the winning price of a second price sealed-bid auction.
+A demonstrator running an algorithm for finding the winner and the winning price of a second price sealed-bid auction. It was an home work done, for a company few years ago.
 
 ## Instructions
 
